@@ -13,6 +13,7 @@ import org.springframework.util.Assert;
 import com.google.common.base.Strings;
 
 import net.euroboxonline.battlecom.domain.User;
+import net.euroboxonline.battlecom.utils.EncryptionHelper;
 
 
 /**
@@ -49,8 +50,30 @@ public class UserServiceImpl implements UserService
     @Override
     public User getUserByEmailAndPassword( String email, String password )
     {
-        return this.userRepository.findByEmailAndEncryptedPassword( email, password );
+        User user = null;
+        
+        user = this.userRepository.findByEmail( email );
+        
+        if ( user != null )
+        {
+            if ( !EncryptionHelper.isPasswordCorrect( user, password ) )
+            {
+                user = null;
+            }
+        }
+        
+        return user;
     }
+    
+    /* (non-Javadoc)
+     * @see net.euroboxonline.battlecom.service.UserService#getUserByEmail(java.lang.String)
+     */
+    @Override
+    public User getUserByEmail( String email )
+    {
+        return this.userRepository.findByEmail( email );
+    }
+
 
     /* (non-Javadoc)
      * @see net.euroboxonline.battlecom.service.UserService#isUserExisted(java.lang.String)

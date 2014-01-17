@@ -17,6 +17,8 @@ public interface UserService
     
     public User getUserByEmailAndPassword( String email, String password );
     
+    public User getUserByEmail( String email );
+
     public boolean isUserExisted( String email );
     
     public User save( User user );

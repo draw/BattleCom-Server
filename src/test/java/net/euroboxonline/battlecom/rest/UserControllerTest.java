@@ -32,7 +32,7 @@ import org.springframework.web.context.WebApplicationContext;
 @RunWith( SpringJUnit4ClassRunner.class )
 @SpringApplicationConfiguration(classes = Application.class )
 @WebAppConfiguration
-//@ActiveProfiles( "scratch" )
+@ActiveProfiles( "scratch" )
 public class UserControllerTest
 {
 
